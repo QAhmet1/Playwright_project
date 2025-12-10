@@ -1,0 +1,32 @@
+{
+  "name": "playwrite",
+  "version": "1.0.0",
+  "description": "Playwright UI + API automation with POM, custom commands, Allure reporting, and CI scheduling.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test tests/ui",
+    "test:api": "npx playwright test tests/api",
+    "test:ci": "npx playwright test --reporter=list,allure-playwright,html",
+    "test:ui:headed": "npm run clean:reports && npx playwright test tests/ui --headed",
+    "test:ui:headed:open": "npm run clean:reports && npx playwright test tests/ui --headed && npm run report:playwright",
+    "test:open-report": "npm run test && npm run report:playwright",
+    "allure:generate": "npx allure generate --clean ./allure-results --output ./allure-report",
+    "allure:open": "npx allure open ./allure-report",
+    "test:allure:open": "npm run test:ci && npm run allure:generate && npm run allure:open",
+    "report:playwright": "npx playwright show-report",
+    "clean:reports": "rimraf test-results playwright-report allure-results allure-report"
+  },
+  "keywords": [],
+  "author": "Ahmet Demir",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.43.0",
+    "@types/node": "^20.12.5",
+    "allure-commandline": "^2.30.0",
+    "allure-playwright": "^3.4.3",
+    "dotenv": "^17.2.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.0"
+  }
+}
