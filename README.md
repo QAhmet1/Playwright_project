@@ -45,9 +45,18 @@ UI and API automation using Playwright with Page Object Model, reusable commands
 - API: https://dummyjson.com
 
 ## Environment Configuration
-Create a `.env` file from `env.sample` to configure:
+Create a `.env` file in the project root to configure (optional - defaults are used if not set):
 - **Credentials**: `LOGIN_USER`, `LOGIN_PASS`
 - **Base URLs**: `BASE_URL_TODO`, `BASE_URL_LOGIN`, `BASE_URL_API`
+
+Example `.env`:
+```
+LOGIN_USER=tomsmith
+LOGIN_PASS=SuperSecretPassword!
+BASE_URL_TODO=https://demo.playwright.dev/todomvc
+BASE_URL_LOGIN=https://the-internet.herokuapp.com/login
+BASE_URL_API=https://dummyjson.com
+```
 
 All values have defaults, but env overrides allow switching environments (dev/staging/prod) without code changes.
 
