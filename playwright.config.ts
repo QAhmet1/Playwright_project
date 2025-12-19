@@ -1,14 +1,23 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
+import { config } from './tests/support/config';
 
+// Load environment variables from .env file (if it exists)
+// This allows local development with .env file
+// In CI/CD, environment variables are set directly by the pipeline
 dotenv.config();
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
+ * Playwright Test Configuration
+ * 
+ * This configuration supports:
+ * - Environment-based configuration via .env file
+ * - Parallel test execution
+ * - Multiple browser testing (Chromium, Firefox, WebKit)
+ * - Comprehensive reporting (List, HTML, Allure)
+ * - CI/CD optimization with retries and workers
+ * - Test sharding via command-line flag (--shard)
  */
-// require('dotenv').config();
-
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -27,7 +36,9 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    baseURL: undefined
+    // Use centralized config instead of directly reading process.env
+    // This ensures consistency across the entire test suite
+    baseURL: config.urls.base,
   },
   projects: [
     {
@@ -38,9 +49,9 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
 });

@@ -1,5 +1,6 @@
 import { expect, Page, Locator } from '@playwright/test';
 import { BasePage } from './base.page';
+import { config } from '../support/config';
 
 type Filter = 'All' | 'Active' | 'Completed';
 
@@ -18,8 +19,7 @@ export class TodoPage extends BasePage {
   }
 
   async goto() {
-    const baseUrl = process.env.BASE_URL_TODO || 'https://demo.playwright.dev/todomvc';
-    await this.page.goto(baseUrl);
+    await this.page.goto(config.urls.todo);
     await expect(this.todoInput).toBeVisible();
   }
 

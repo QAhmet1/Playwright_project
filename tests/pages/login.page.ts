@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { BasePage } from './base.page';
+import { config } from '../support/config';
 
 export class LoginPage extends BasePage {
   private readonly username = this.page.locator('#username');
@@ -12,8 +13,7 @@ export class LoginPage extends BasePage {
   }
 
   async goto() {
-    const baseUrl = process.env.BASE_URL_LOGIN || 'https://the-internet.herokuapp.com/login';
-    await this.page.goto(baseUrl);
+    await this.page.goto(`${config.urls.base}/login`);
   }
 
   async login(username: string, password: string) {
@@ -32,6 +32,36 @@ export class LoginPage extends BasePage {
 
   async assertFailurePassword() {
     await expect(this.flash).toContainText('Your password is invalid!');
+  }
+
+  /**
+   * Asserts that flash message contains invalid text (for empty credentials)
+   */
+  async assertFlashContainsInvalid() {
+    const flashText = await this.flash.textContent();
+    expect(flashText).toContain('invalid');
+  }
+
+  /**
+   * Asserts that username field is visible (used after logout redirect)
+   */
+  async assertUsernameFieldVisible() {
+    await expect(this.username).toBeVisible();
+  }
+
+  /**
+   * Asserts that password field is visible (used after logout redirect)
+   */
+  async assertPasswordFieldVisible() {
+    await expect(this.password).toBeVisible();
+  }
+
+  /**
+   * Asserts that login page is displayed (both fields visible)
+   */
+  async assertLoginPageDisplayed() {
+    await this.assertUsernameFieldVisible();
+    await this.assertPasswordFieldVisible();
   }
 }
 
