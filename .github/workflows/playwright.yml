@@ -30,15 +30,11 @@ jobs:
 
       - name: Run Playwright with sharding (list + allure + html)
         env:
-          # Configuration via environment variables
-          # These are read by tests/support/config.ts
-          # Priority: GitHub Secrets > Default values (from config.ts)
-          # If secrets are not set, defaults from config.ts will be used
-          BASE_URL: ${{ secrets.BASE_URL || 'https://the-internet.herokuapp.com' }}
-          BASE_URL_TODO: ${{ secrets.BASE_URL_TODO || 'https://demo.playwright.dev/todomvc' }}
-          BASE_URL_API: ${{ secrets.BASE_URL_API || 'https://dummyjson.com' }}
-          LOGIN_USER: ${{ secrets.LOGIN_USER || 'tomsmith' }}
-          LOGIN_PASS: ${{ secrets.LOGIN_PASS || 'SuperSecretPassword!' }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL_TODO: ${{ secrets.BASE_URL_TODO }}
+          BASE_URL_API: ${{ secrets.BASE_URL_API }}
+          LOGIN_USER: ${{ secrets.LOGIN_USER}}
+          LOGIN_PASS: ${{ secrets.LOGIN_PASS }}
           CI: true
         run: npx playwright test --reporter=list,allure-playwright,html --shard=${{ matrix.shard }}/3
 

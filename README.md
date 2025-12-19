@@ -78,8 +78,8 @@ Playwright/
    BASE_URL=https://the-internet.herokuapp.com
    BASE_URL_TODO=https://demo.playwright.dev/todomvc
    BASE_URL_API=https://dummyjson.com
-   LOGIN_USER=tomsmith
-   LOGIN_PASS=SuperSecretPassword!
+   LOGIN_USER=*********
+   LOGIN_PASS=************
    ```
    
    > **Note**: All environment variables have default values, so this step is optional for local development.
@@ -340,6 +340,3 @@ ISC
 - Playwright team for the excellent testing framework
 - Allure reporting community
 
----
-
-*This project serves as a comprehensive example of modern test automation practices and is suitable for portfolio demonstrations.*
