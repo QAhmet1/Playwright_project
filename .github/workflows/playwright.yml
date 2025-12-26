@@ -35,6 +35,7 @@ jobs:
           BASE_URL_API: ${{ secrets.BASE_URL_API }}
           LOGIN_USER: ${{ secrets.LOGIN_USER}}
           LOGIN_PASS: ${{ secrets.LOGIN_PASS }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           CI: true
         run: npx playwright test --reporter=list,allure-playwright,html --shard=${{ matrix.shard }}/3
 
