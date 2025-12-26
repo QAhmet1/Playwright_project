@@ -18,7 +18,9 @@
     "allure:open": "npx allure open ./allure-report",
     "test:allure:open": "npm run test:ci && npm run allure:generate && npm run allure:open",
     "report:playwright": "npx playwright show-report",
-    "clean:reports": "rimraf test-results playwright-report allure-results allure-report"
+    "clean:reports": "rimraf test-results playwright-report allure-results allure-report",
+    "test:ai":"npm run clean:reports && npx playwright test tests/ai/ai-demo.spec.ts --headed --workers=1",
+    "test:ai2":"npm run clean:reports && npx playwright test tests/ai/ai-gen1.spec.ts --headed --workers=1"
   },
   "keywords": [],
   "author": "Ahmet Demir",
@@ -31,5 +33,8 @@
     "dotenv": "^17.2.3",
     "rimraf": "^5.0.5",
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "openai": "^6.15.0"
   }
 }
